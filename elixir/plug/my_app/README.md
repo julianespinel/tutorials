@@ -37,6 +37,6 @@ Open a new browser and go to: [http://localhost:4001/hello](http://localhost:400
 
 You should see: `world` in your browser.
 
-# Testing
+## Testing
 
 Run the tests with: `mix test`
