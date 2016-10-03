@@ -1,24 +1,15 @@
 # MyApp
 
-**TODO: Add description**
+Plug tutorial: https://hexdocs.pm/plug/readme.html
 
-## Installation
+## How to run
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed as:
+Please follow this steps:
 
-  1. Add `my_app` to your list of dependencies in `mix.exs`:
+1. `git clone https://github.com/julianespinel/tutorials.git`
+1. `cd tutorials/elixir/plug/my_app`
+1. `mix run --no-halt`
 
-    ```elixir
-    def deps do
-      [{:my_app, "~> 0.1.0"}]
-    end
-    ```
+Open a new browser and go to: [http://localhost:4001/hello](http://localhost:4001/hello)
 
-  2. Ensure `my_app` is started before your application:
-
-    ```elixir
-    def application do
-      [applications: [:my_app]]
-    end
-    ```
-
+You should see: `world` in your browser.
