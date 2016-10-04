@@ -7,9 +7,9 @@ defmodule KV.RegistryTest do
   end
 
   test "creates buckets", %{registry: registry} do
-    # Assert registry does not exist
+    # Assert bucket does not exist
     assert KV.Registry.lookup(registry, "shopping") == :error
-    # Test the registry
+    # Get the bucket
     KV.Registry.create(registry, "shopping")
     assert {:ok, bucket} = KV.Registry.lookup(registry, "shopping")
     # Test the bucket
