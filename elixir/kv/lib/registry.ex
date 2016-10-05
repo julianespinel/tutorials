@@ -24,7 +24,7 @@ defmodule KV.Registry do
 
   # Server callbacks
 
-  def init(:ok) do
+  def init(table) do
     names = :ets.new(table, [:named_table, read_concurrency: true])
     refs = %{}
     {:ok, {names, refs}}
