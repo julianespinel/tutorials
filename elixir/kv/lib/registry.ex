@@ -4,7 +4,7 @@ defmodule KV.Registry do
   # Client API
 
   def start_link(name) do
-    GenServer.start_link(__MODULE__, :ok, name: name) # Remove :ok?
+    GenServer.start_link(__MODULE__, name, name: name)
   end
 
   def lookup(server, name) when is_atom(server) do
