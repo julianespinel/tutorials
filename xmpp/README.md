@@ -2,7 +2,7 @@
 
 This tutorial has two main parts:
 
-## ejabberd setup
+## 1. ejabberd setup
 
 1. How to install an ejabberd server?<br>
    `apt-get -y install ejabberd`
@@ -36,15 +36,17 @@ This tutorial has two main parts:
 
 Source: https://www.digitalocean.com/community/tutorials/how-to-install-ejabberd-xmpp-server-on-ubuntu
 
-## Programmatic ejabberd usage with Python
+## 2. Programmatic ejabberd usage with Python
 
 First download the repository and go to the xmpp folder:
+
 1. `git pull git@github.com:julianespinel/tutorials.git`
 1. `cd tutorials/xmpp`
 
 Before running each of the following steps, please open each .py file and change the value of the `host` variable for the IP address where your ejabberd server is located.
 
 Python scripts:
+
 1. Register a new user to server (Create new user in ejabberd)<br>
    Run the script:<br> `python 01_register_user_to_server.py`<br>
    Check (change the IP address):<br> `http://54.145.200.149:5280/admin/server/54.145.200.149/users/`
