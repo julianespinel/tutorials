@@ -11,15 +11,15 @@ This tutorial has two main parts:
 1. Give admin privileges<br>
    Depending on the ejabberd version you are using you should modify the file `/etc/ejabberd/ejabberd.cfg` or `/etc/ejabberd/ejabberd.yml`
 
-   In the file `/etc/ejabberd/ejabberd.cfg`:
+   In the file `/etc/ejabberd/ejabberd.cfg` (change the IP address):
      ```
      %% Admin user
      {acl, admin, {user, "admin", "localhost"}}.
 
      %% Hostname
-     {hosts, ["localhost"]}.
+     {hosts, ["54.145.200.149"]}.
      ```
-   In the file `/etc/ejabberd/ejabberd.yml`:
+   In the file `/etc/ejabberd/ejabberd.yml` (change the IP address):
    ```
    hosts:
      - "54.145.200.149"
@@ -29,8 +29,8 @@ This tutorial has two main parts:
          - "admin": "localhost"
    ```
    Save the file and restart the ejabberd service.
-1. Log in into the ejabberd web admin<br>
-   `http://localhost:5280/admin`<br>
+1. Log in into the ejabberd web admin (change the IP address)<br>
+   `http://54.145.200.149:5280/admin`<br>
    username: `admin@localhost`<br>
    password: `password`<br>
 
