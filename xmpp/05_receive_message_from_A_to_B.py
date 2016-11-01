@@ -8,8 +8,8 @@ logger = logging.getLogger('receive_message')
 
 class EchoBot(ClientXMPP):
 
-    def __init__(self, jid, password):
-        ClientXMPP.__init__(self, jid, password)
+    def __init__(self, recipient_jid, recipient_password):
+        ClientXMPP.__init__(self, recipient_jid, recipient_password)
 
         self.add_event_handler("session_start", self.session_start)
         self.add_event_handler("ssl_invalid_cert", self.discard)
@@ -38,13 +38,13 @@ class EchoBot(ClientXMPP):
 
     def message(self, msg):
         if msg['type'] in ('chat', 'normal'):
-            msg.reply("Thanks for sending\n%(body)s" % msg).send()
+            msg.reply("Thanks for sending: %(body)s" % msg).send()
 
 
 if __name__ == '__main__':
     host = '54.145.200.149'
-    jid = 'test2@' + host
-    password = 'test'
-    xmpp = EchoBot(jid, password)
+    recipient_jid = 'test2@' + host
+    recipient_password = 'test'
+    xmpp = EchoBot(recipient_jid, recipient_password)
     xmpp.connect()
     xmpp.process(block=True)
