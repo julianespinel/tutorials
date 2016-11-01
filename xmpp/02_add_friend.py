@@ -26,16 +26,9 @@ class SendMsgBot(sleekxmpp.ClientXMPP):
     and then log out.
     """
 
-    host = '54.145.200.149'
-
-    def __init__(self):
-        jid = 'test1@' + self.host
-        password = 'test'
-        sleekxmpp.ClientXMPP.__init__(self, jid, password)
-
-        # The message we wish to send, and the JID that will receive it.
-        self.recipient = 'test2@' + self.host
-        self.msg = 'Hello from Python!'
+    def __init__(self, sender_jid, sender_password, recipient_jid):
+        sleekxmpp.ClientXMPP.__init__(self, sender_jid, sender_password)
+        self.recipient_jid = recipient_jid
 
         # The session_start event will be triggered when
         # the bot establishes its connection with the server
@@ -51,7 +44,7 @@ class SendMsgBot(sleekxmpp.ClientXMPP):
         # Process the session_start event.
         self.send_presence()
         self.get_roster()
-        self.update_roster('test2@' + self.host, groups=['Buddies'])
+        self.update_roster(self.recipient_jid, groups=['Buddies'])
         # Using wait=True ensures that the send queue will be emptied before ending the session.
         self.disconnect(wait=True)
 
@@ -62,11 +55,16 @@ class SendMsgBot(sleekxmpp.ClientXMPP):
         return
 
 if __name__ == '__main__':
+    host = '54.145.200.149'
+    sender_jid = 'test1@' + host
+    sender_password = 'test'
+
+    recipient_jid = 'test2@' + host
 
     # Setup the EchoBot and register plugins. Note that while plugins may
     # have interdependencies, the order in which you register them does
     # not matter.
-    xmpp = SendMsgBot()
+    xmpp = SendMsgBot(sender_jid, sender_password, recipient_jid)
     xmpp.register_plugin('xep_0030') # Service Discovery
     xmpp.register_plugin('xep_0199') # XMPP Ping
 
