@@ -21,6 +21,9 @@ This tutorial has two main parts:
      ```
    In the file `/etc/ejabberd/ejabberd.yml`:
    ```
+   hosts:
+     - "54.145.200.149"
+
    admin:
      user:
          - "admin": "localhost"
