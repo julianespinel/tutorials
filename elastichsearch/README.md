@@ -1,6 +1,6 @@
 # ElasticSearch (ES) tutorial
 
-This folder contains a basic CRUD of ElasticSearch using the Java driver.<br>
+This Maven project contains a basic ElasticSearch CRUD using the Java driver.<br>
 In the `test` folder you can find unit tests and integration tests (tests that go to ES).
 
 ## Dependencies
