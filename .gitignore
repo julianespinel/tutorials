@@ -52,6 +52,7 @@ fabric.properties
 # Extras
 
 .idea/
+*.iml
 
 # Java gitignore from: https://raw.githubusercontent.com/github/gitignore/master/Java.gitignore
 
@@ -77,3 +78,7 @@ fabric.properties
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+
+# Extras
+
+target/
