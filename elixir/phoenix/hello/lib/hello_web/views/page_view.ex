@@ -16,4 +16,14 @@ defmodule HelloWeb.PageView do
   def render("page.json", %{page: page}) do
     %{title: page.title}
   end
+
+  def handler_info(conn) do
+    "Request handled by: #{controller_module(conn)}.#{action_name(conn)}"
+  end
+
+  def connection_keys(conn) do
+    conn
+    |> Map.from_struct()
+    |> Map.keys()
+  end
 end

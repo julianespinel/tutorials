@@ -32,6 +32,8 @@ defmodule HelloWeb.Router do
 
     # Route for redirects
     get("/redirect_test", PageController, :redirect_test, as: :redirect_test)
+
+    get("/test", PageController, :test)
   end
 
   scope "/admin", HelloWeb.Admin, as: :admin do

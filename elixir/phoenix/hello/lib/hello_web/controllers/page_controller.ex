@@ -48,4 +48,8 @@ defmodule HelloWeb.PageController do
     page = %{title: "foo"}
     render(conn, "show.json", page: page)
   end
+
+  def test(conn, _params) do
+    render(conn, "test.html")
+  end
 end
