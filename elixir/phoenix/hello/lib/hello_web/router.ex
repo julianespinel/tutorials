@@ -2,7 +2,7 @@ defmodule HelloWeb.Router do
   use HelloWeb, :router
 
   pipeline :browser do
-    plug(:accepts, ["html"])
+    plug(:accepts, ["html", "text"])
     plug(:fetch_session)
     plug(:fetch_flash)
     plug(:protect_from_forgery)
@@ -18,14 +18,20 @@ defmodule HelloWeb.Router do
     pipe_through(:browser)
 
     get("/", PageController, :index)
+    get("/admin", PageController, :index_admin)
+
     get("/hello", HelloController, :index)
     get("/hello/:messenger", HelloController, :show)
+    get("/hallo/:messenger", HelloController, :show_json)
     # Nested resources: a one-to-many relationship (user -> posts)
     resources("/users", UserController) do
       resources("/posts", PostController)
     end
 
     resources("/reviews", ReviewController)
+
+    # Route for redirects
+    get("/redirect_test", PageController, :redirect_test, as: :redirect_test)
   end
 
   scope "/admin", HelloWeb.Admin, as: :admin do
