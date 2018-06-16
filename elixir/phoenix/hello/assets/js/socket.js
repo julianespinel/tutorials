@@ -3,9 +3,9 @@
 
 // To use Phoenix channels, the first step is to import Socket
 // and connect at the socket path in "lib/web/endpoint.ex":
-import {Socket} from "phoenix"
-
-let socket = new Socket("/socket", {params: {token: window.userToken}})
+// import {Socket} from "phoenix"
+//
+// let socket = new Socket("/socket", {params: {token: window.userToken}})
 
 // When you connect, you'll often need to authenticate the client.
 // For example, imagine you have an authentication plug, `MyAuth`,
@@ -51,7 +51,24 @@ let socket = new Socket("/socket", {params: {token: window.userToken}})
 // Finally, pass the token on connect as below. Or remove it
 // from connect if you don't care about authentication.
 
+import {Socket, Presence} from "phoenix"
+
+let socket = new Socket("/socket", {
+  params: { user_id: window.location.search.split("=")[1] }
+})
+
+function renderOnlineUsers(presences) {
+  let response = ""
+  Presence.list(presences, (id, {metas: [first, ...rest]}) => {
+    let count = rest.length + 1
+    response += `<br>${id} (count: ${count})</br>`
+  })
+  document.querySelector("main[role=main]").innerHTML = response
+}
+
 socket.connect()
+
+let presences = {}
 
 // Now that you are connected, you can join channels with a topic:
 let channel = socket.channel("room:lobby", {})
@@ -69,6 +86,16 @@ channel.on("new_msg", payload => {
   let messageItem = document.createElement("li")
   messageItem.innerText = `[${Date()}] ${payload.body}`
   messagesContainer.appendChild(messageItem)
+})
+
+channel.on("presence_state", state => {
+  presences = Presence.syncState(presences, state)
+  renderOnlineUsers(presences)
+})
+
+channel.on("presence_diff", diff => {
+  presences = Presence.syncDiff(presences, diff)
+  renderOnlineUsers(presences)
 })
 
 channel.join()
