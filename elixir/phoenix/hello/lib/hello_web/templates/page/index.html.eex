@@ -4,6 +4,9 @@
   <p><a href="<%= page_path(@conn, :index) %>">Link back to this page</a></p>
 </div>
 
+<div id="messages"></div>
+<input id="chat-input" type="text"></input>
+
 <div class="row marketing">
   <div class="col-lg-6">
     <h4>Resources</h4>
