@@ -27,6 +27,14 @@
 
 > At compile-time, Phoenix precompiles all \*.html.eex templates and turns them into render/2 function clauses on their respective view modules. At runtime, all templates are already loaded in memory. There’s no disk reads, complex file caching, or template engine computation involved. This is also why we were able to define functions like title/0 in our LayoutView and they were immediately available inside the layout’s app.html.eex – the call to title/0 was just a local function call!
 
+#### Ecto
+
+1. Generate new Schema:
+```
+mix phx.gen.schema User users name:string email:string bio:string number_of_pets:integer
+```
+1. Run migrations: `mix ecto.migrate`
+
 ------------------------------------------------
 
 ## Auto-generated content
