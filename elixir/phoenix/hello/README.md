@@ -35,6 +35,10 @@ mix phx.gen.schema User users name:string email:string bio:string number_of_pets
 ```
 1. Run migrations: `mix ecto.migrate`
 
+#### Contexts
+
+> Contexts are dedicated modules that expose and group related functionality.
+
 ------------------------------------------------
 
 ## Auto-generated content

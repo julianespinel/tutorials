@@ -13,11 +13,29 @@ defmodule HelloWeb.Router do
     plug(:accepts, ["json"])
   end
 
+  defp authenticate_user(conn, _) do
+    case get_session(conn, :user_id) do
+      nil ->
+        conn
+        |> Phoenix.Controller.put_flash(:error, "Login required")
+        |> Phoenix.Controller.redirect(to: "/")
+        |> halt()
+      user_id ->
+        assign(conn, :current_user, Hello.Accounts.get_user!(user_id))
+    end
+  end
+
   scope "/", HelloWeb do
     # Use the default browser stack
     pipe_through(:browser)
 
     get("/", PageController, :index)
+    resources("/users", UserController)
+    resources("/sessions", SessionController, only: [:new, :create, :delete],
+                                              singleton: true)
+    # singleton: true option, which defines all the RESTful routes, but does not
+    # require a resource ID to be passed along in the URL.
+
     get("/admin", PageController, :index_admin)
 
     get("/hello", HelloController, :index)
@@ -34,6 +52,12 @@ defmodule HelloWeb.Router do
     get("/redirect_test", PageController, :redirect_test, as: :redirect_test)
 
     get("/test", PageController, :test)
+  end
+
+  scope "/cms", HelloWeb.CMS, as: :cms do
+    pipe_through [:browser, :authenticate_user]
+    
+    resources("/pages", PageController)
   end
 
   scope "/admin", HelloWeb.Admin, as: :admin do
