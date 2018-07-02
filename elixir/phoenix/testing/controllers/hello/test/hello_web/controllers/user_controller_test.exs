@@ -3,6 +3,13 @@ defmodule HelloWeb.UserControllerTest do
 
   alias Hello.Accounts
 
+  @create_attrs %{name: "John", email: "john@example.com", password: "john pass"}
+
+  defp create_user(_) do
+    {:ok, user} = Accounts.create_user(@create_attrs)
+    {:ok, user: user}
+  end
+
   test "index/2 responds with all users", %{conn: conn} do
     users = [
       %{name: "John", email: "john@example.com", password: "john pass"},
@@ -33,8 +40,31 @@ defmodule HelloWeb.UserControllerTest do
   end
 
   describe "show/2" do
-    test "Responds with user info if user if found"
-    test "Responds with a message indicating user not found"
+    setup [:create_user]
+
+    test "Responds with user info if user if found", %{conn: conn, user: user} do
+      response =
+        conn
+        |> get(user_path(conn, :show, user.id))
+        |> json_response(:ok)
+
+      expected = %{"data" => %{"name" => user.name, "email" => user.email}}
+
+      assert response == expected
+    end
+
+    test "Responds with a message indicating user not found", %{conn: conn} do
+      fake_user_id = 123
+
+      response =
+        conn
+        |> get(user_path(conn, :show, fake_user_id))
+        |> json_response(:not_found)
+
+      expected = %{"message" => "User not found"}
+
+      assert response == expected
+    end
   end
 
   describe "update/2" do
